@@ -11,7 +11,7 @@ Find the product abc.
 let triplet =
     let rec findTriplet' m =
         let n =
-            seq { 1..m }
+            seq { 1 .. m - 1 }
             |> Seq.tryFind (fun n -> m * (m + n) = 500)
 
         match n with
