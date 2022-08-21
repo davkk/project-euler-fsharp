@@ -17,17 +17,20 @@ What is the smallest positive number that is evenly divisible by all of the numb
 // |> Seq.filter (isDivisibleByRange [ 2..20 ])
 // |> Seq.head
 
+let isPrime (number: int64) =
+    if number &&& 1 = 0 then
+        false
+    else
+        let sq = number |> float |> sqrt |> int64
 
-let isPrime number =
-    let sq = number |> float |> sqrt |> int
+        seq { 3L .. 2L .. sq }
+        |> Seq.exists (fun i -> number % i = 0L)
+        |> not
 
-    seq { 2..sq }
-    |> Seq.exists (fun i -> number % i = 0)
-    |> not
+let primes limit =
+    seq { 2L .. limit } |> Seq.filter isPrime
 
-let primes limit = seq { 2..limit } |> Seq.filter isPrime
-
-let smallestMultiple (limit: int) (numbers: int seq) =
+let smallestMultiple (limit: int64) (numbers: int64 seq) =
     numbers
     |> Seq.fold
         (fun product prime ->
@@ -37,6 +40,6 @@ let smallestMultiple (limit: int) (numbers: int seq) =
         1.
 
 let solve limit =
-    primes limit |> smallestMultiple limit |> int
+    primes limit |> smallestMultiple limit |> int64
 
 solve 20
