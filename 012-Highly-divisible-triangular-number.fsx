@@ -17,11 +17,12 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 *)
 
-
 let isPrime (number: int64) =
     match number with
-    | _ when number < 2L -> false
+    | 1L -> false
+    | _ when number < 4L -> true
     | _ when number &&& 1 = 0 -> false
+    | _ when number < 9L -> true
     | _ ->
         let sq = number |> float |> sqrt |> int64
 
